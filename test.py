@@ -1,45 +1,25 @@
-import os
-import pytube
-import whisper
-from transformers import pipeline
+import yt_dlp
 
+#Função que vai baixar o áudio do vídeo do youtube em webm e em seguida converter para mp3
 def baixar_audio(youtube_url):
-    """Baixa o áudio de um vídeo do YouTube e salva como MP3."""
-    yt = pytube.YouTube(youtube_url)
-    audio_stream = yt.streams.filter(only_audio=True).first()
-    output_path = audio_stream.download(filename="audio.mp4")
-    return output_path
+    try:
+        opcoes = {
+            'format': 'bestaudio/best',  # Melhor qualidade de áudio disponível
+            'outtmpl': '%(title)s.%(ext)s',  # Nome do arquivo = título do vídeo
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',  # Qualidade do MP3
+            }],
+        }
 
-def transcrever_audio(audio_path):
-    """Transcreve o áudio usando Whisper."""
-    model = whisper.load_model("base")  # Pode usar 'small' ou 'medium' se quiser mais precisão
-    result = model.transcribe(audio_path)
-    return result["text"]
+        with yt_dlp.YoutubeDL(opcoes) as ydl:
+            ydl.download([youtube_url])
+            print("Download concluído!")
 
-def analisar_texto(texto):
-    """Analisa o texto usando um modelo de NLP da Hugging Face (zero custo)."""
-    classifier = pipeline("sentiment-analysis")
-    analise = classifier(texto)
-    return analise
+    except Exception as e:
+        print(f"Erro ao baixar o áudio: {e}")
 
-def main():
-    url = input("Digite a URL do vídeo do YouTube: ")
-    
-    print("Baixando áudio...")
-    audio_path = baixar_audio(url)
-    
-    print("Transcrevendo áudio para texto...")
-    texto = transcrever_audio(audio_path)
-    
-    print("Texto transcrito:\n", texto)
-
-    print("Analisando sentimento do texto...")
-    resultado_analise = analisar_texto(texto)
-    
-    print("Resultado da análise:", resultado_analise)
-
-    # Removendo o arquivo de áudio para não ocupar espaço
-    os.remove(audio_path)
-
-if __name__ == "__main__":
-    main()
+# Exemplo de uso:
+url = input("Digite a URL do vídeo do YouTube: ")
+baixar_audio(url)
