@@ -16,25 +16,37 @@
 
     <section class="dashboard">
         <h2>Contratos de Frete</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Transportadora</th>
-                <th>Cliente</th>
-                <th>Valor</th>
-                <th>Status</th>
-                <th>Ação</th>
-            </tr>
-            <!-- Aqui vão os contratos vindos do backend -->
-            <tr>
-                <td>1</td>
-                <td>Expresso XYZ</td>
-                <td>João Silva</td>
-                <td>R$ 1500</td>
-                <td>Pendente</td>
-                <td><a href="/contrato/1">Ver</a></td>
-            </tr>
-        </table>
+        {% if contratos %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Transportadora</th>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <!-- Aqui vão os contratos vindos do backend -->
+                <tbody>
+                    {% for contrato in contratos %}
+                    <tr>
+                        <td>{{ contrato.id }}</td>
+                            <td>{{ contrato.transportadora }}</td>
+                            <td>{{ contrato.cliente }}</td>
+                            <td>R$ {{ contrato.valor }}</td>
+                            <td>{{ contrato.status }}</td>
+                            <td>
+                                <a href="/contrato/{{ contrato.id }}">Ver</a>
+                            </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Nenhum contrato cadastrado.</p>
+        {% endif %}
         <a href="/novo_contrato">Criar novo contrato</a>
     </section>
 

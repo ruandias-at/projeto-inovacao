@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Contrato</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Criar Novo Contrato</h1>
+        <nav>
+            <a href="/">Voltar ao Dashboard</a>
+        </nav>
+    </header>
+
+    <section class="formulario">
+        <form action="/novo_contrato" method="post">
+            <label for="transportadora">Transportadora:</label>
+            <input type="text" id="transportadora" name="transportadora" required>
+
+            <label for="cliente">Cliente:</label>
+            <input type="text" id="cliente" name="cliente" required>
+
+            <label for="valor">Valor do Frete (R$):</label>
+            <input type="number" id="valor" name="valor" step="0.01" required>
+
+            <button type="submit">Salvar Contrato</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sistema de Gestão de Fretes</p>
+    </footer>
+</body>
+</html>
