@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Contratos de Frete</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao Sistema de Contratos de Frete</h1>
+        <nav>
+            <a href="/logout">Sair</a>
+        </nav>
+    </header>
+
+    <section class="dashboard">
+        <h2>Contratos de Frete</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Transportadora</th>
+                <th>Cliente</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Ação</th>
+            </tr>
+            <!-- Aqui vão os contratos vindos do backend -->
+            <tr>
+                <td>1</td>
+                <td>Expresso XYZ</td>
+                <td>João Silva</td>
+                <td>R$ 1500</td>
+                <td>Pendente</td>
+                <td><a href="/contrato/1">Ver</a></td>
+            </tr>
+        </table>
+        <a href="/novo_contrato">Criar novo contrato</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sistema de Gestão de Fretes</p>
+    </footer>
+</body>
+</html>
