@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask_migrate import Migrate
 from models import db, Usuario, ContratoFrete  # Importando os modelos corretamente
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:ruan@localhost/proj'
 app.config['SECRET_KEY'] = 'chave_secreta'
 
+migrate = Migrate(app, db)
 db.init_app(app)  # Inicializa a conexão do banco de dados com o app Flask
 
 login_manager = LoginManager(app)

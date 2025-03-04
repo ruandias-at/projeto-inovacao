@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Contratos de Frete</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="../static/dashboard.css">
 </head>
 <body>
     <header>
@@ -24,7 +24,6 @@
                         <th>Transportadora</th>
                         <th>Cliente</th>
                         <th>Valor</th>
-                        <th>Status</th>
                         <th>Ação</th>
                     </tr>
                 </thead>
@@ -36,9 +35,9 @@
                         <td>{{ contrato.transportadora }}</td>
                         <td>{{ contrato.cliente }}</td>
                         <td>R$ {{ contrato.valor }}</td>
-                        <td>{{ contrato.status }}</td>
                         <td>
                             <form action="{{ url_for('excluir_contrato', contrato_id=contrato.id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este contrato?');">
+                            <a href="/contrato/{{ contrato.id }}" id="ver_contrato">Ver</a>
                             <button type="submit" class="btn btn-danger">Excluir</button>
                         </form></td>
                     </tr>
