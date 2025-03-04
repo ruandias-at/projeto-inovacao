@@ -117,5 +117,11 @@ def excluir_contrato(contrato_id):
     flash("Contrato excluído com sucesso!", "success")
     return redirect(url_for('dashboard'))
 
+@app.route('/contrato/<int:id>')
+@login_required
+def contrato(id):
+    contrato = ContratoFrete.query.get_or_404(id)
+    return render_template('contrato.html', contrato=contrato)
+
 if __name__ == '__main__':
     app.run(debug=True)
