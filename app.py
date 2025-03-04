@@ -81,6 +81,9 @@ def logout():
 @login_required
 def dashboard():
     contratos = ContratoFrete.query.filter_by(usuario_id=current_user.id).all()
+    # Formata os valores para 2 casas decimais
+    for contrato in contratos:
+        contrato.valor = round(float(contrato.valor), 2)
     return render_template('dashboard.html', contratos=contratos)
 
 @app.route('/novo_contrato', methods=['GET', 'POST'])

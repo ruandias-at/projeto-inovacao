@@ -15,12 +15,11 @@
     </header>
 
     <section class="contrato">
-        <h2>Contrato ID: {{ contrato.id }}</h2>
+        <h2>Contrato</h2>
         <p><strong>Transportadora:</strong> {{ contrato.transportadora }}</p>
         <p><strong>Cliente:</strong> {{ contrato.cliente }}</p>
-        <p><strong>Valor:</strong> R$ {{ contrato.valor }}</p>
+        <p><strong>Valor:</strong> R$ {{ "%.2f"|format(contrato.valor) }}</p>
         <p><strong>Status:</strong> {{ contrato.status }}</p>
-
         <a href="/">Voltar</a>
     </section>
 

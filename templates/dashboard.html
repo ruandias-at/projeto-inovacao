@@ -20,7 +20,6 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Transportadora</th>
                         <th>Cliente</th>
                         <th>Valor</th>
@@ -31,10 +30,9 @@
                 <tbody>
                     {% for contrato in contratos %}
                     <tr>
-                        <td>{{ contrato.id }}</td>
                         <td>{{ contrato.transportadora }}</td>
                         <td>{{ contrato.cliente }}</td>
-                        <td>R$ {{ contrato.valor }}</td>
+                        <td>R$ {{ "%.2f"|format(contrato.valor) }}</td>
                         <td>
                             <form action="{{ url_for('excluir_contrato', contrato_id=contrato.id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este contrato?');">
                             <a href="/contrato/{{ contrato.id }}" id="ver_contrato">Ver</a>
