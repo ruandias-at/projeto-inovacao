@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, Usuario, ContratoFrete  # Importando os modelos corretamente
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://usuario:senha@localhost/nome_do_banco'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:ruan@localhost/proj'
 app.config['SECRET_KEY'] = 'chave_secreta'
 
 db.init_app(app)  # Inicializa a conexão do banco de dados com o app Flask
@@ -118,6 +118,4 @@ def excluir_contrato(contrato_id):
     return redirect(url_for('dashboard'))
 
 if __name__ == '__main__':
-
-
     app.run(debug=True)
