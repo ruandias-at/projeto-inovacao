@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Sistema de Contratos de Frete</title>
+    <link rel="stylesheet" href="../static/home.css">
+</head>
+<body>
+    <header>
+        <h1>Sistema de Contratos de Frete</h1>
+        <nav>
+            {% if current_user.is_authenticated %}
+                <!-- Se o usuário estiver logado -->
+                <p>Bem-vindo, {{ current_user.nome }}!</p>
+                <a href="/logout">Sair</a>
+            {% else %}
+                <!-- Se o usuário não estiver logado -->
+                <a href="/login">Login</a>
+                <a href="/cadastro">Cadastro</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <section class="contratos">
+        <h2>Contratos de Frete</h2>
+        {% if contratos %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transportadora</th>
+                        <th>Usuário</th>
+                        <th>Valor do Frete</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contrato in contratos %}
+                    <tr>
+                        <td>{{ contrato.transportadora }}</td>
+                        <td>{{ contrato.usuario.nome }}</td>
+                        <td>R$ {{ "%.2f"|format(contrato.valor) }}</td>
+                        <td><a href="/contrato/{{ contrato.id }}" id="ver_contrato">Ver</a></td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+            {% if current_user.is_authenticated %}
+                <a href="/dashboard" id="meus_contratos">Meus contratos</a>
+            {% endif %}
+        {% else %}
+            <p>Nenhum contrato cadastrado.</p>
+        {% endif %}
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sistema de Gestão de Fretes</p>
+    </footer>
+</body>
+</html>

@@ -78,6 +78,11 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/')
+def home():
+    contratos = ContratoFrete.query.all()  # Busca todos os contratos no banco de dados
+    return render_template('home.html', contratos=contratos)
+
+@app.route('/dashboard')
 @login_required
 def dashboard():
     contratos = ContratoFrete.query.filter_by(usuario_id=current_user.id).all()
